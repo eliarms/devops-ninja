@@ -94,6 +94,17 @@ Please Feel free to fork and/or PR if you have any additions.
 - Restart all nginx processes - `nginx -s restart`
 - Realod nginx configuration (without restarting) - `nginx -s reload`
 
+**Tomcat**
+
+- Hide tomcat stack traces (showReport) as well as the Server info:
+  Add below lines at the HOST section
+  ```sh
+  <Valve className="org.apache.catalina.valves.ErrorReportValve"
+  showReport="false"
+  showServerInfo="false" />
+  ```
+
+````
 **Nmap**
 
 - Check single port on single host - `nmap -p <port> <host/IP>`
@@ -159,7 +170,7 @@ Please Feel free to fork and/or PR if you have any additions.
     <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
-```
+````
 
 - Save the file
 - Restart Tomcat

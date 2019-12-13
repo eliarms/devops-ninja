@@ -134,7 +134,7 @@ Please Feel free to fork and/or PR if you have any additions.
 - Show all orphaned processes (could be daemons) - `ps -elf | awk '{if ($5 == 1){print $4" "$5" "$15}}'`
 - Show zombie processes - `ps aux | grep Z`
 
-** HSTS **
+**HSTS**
 
 - Enable HTTP Strict Transport Security protocol in Tomcat
   To enable HSTS in Tomcat, follow these steps:

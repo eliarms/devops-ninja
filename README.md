@@ -157,6 +157,7 @@ Please Feel free to fork and/or PR if you have any additions.
 - Shell Script to Install the latest version of docker-compose
 
   ```sh
+  #!/bin/bash
   # get latest docker compose released tag
   COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
   sudo curl -L "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -317,7 +318,3 @@ Please Feel free to fork and/or PR if you have any additions.
 ```
 
 - Restart IIS.
-
-```
-
-```

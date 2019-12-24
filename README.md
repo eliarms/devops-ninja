@@ -134,9 +134,9 @@ Please Feel free to fork and/or PR if you have any additions.
 - Shell Script to Install Docker on AWS linux
 
 ```sh
-   #!/bin/bash
-   #Get Docker Engine - Community for CentOS + docker compose
-   set -e
+  #!/bin/bash
+  #Get Docker Engine - Community for CentOS + docker compose
+  set -e
  #Uninstall old versions
  sudo yum remove docker docker-common docker-selinux docker-engine-selinux docker-engine docker-ce
  #Update the packages:
@@ -151,6 +151,20 @@ Please Feel free to fork and/or PR if you have any additions.
  # Output current version
   docker -v
 ```
+
+**Docker Compose**
+
+- Shell Script to Install the latest version of docker-compose
+
+  ```sh
+  # get latest docker compose released tag
+  COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
+  sudo curl -L "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo chmod a+x /usr/local/bin/docker-compose
+  sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+  # Output the  version
+  docker-compose -v
+  ```
 
 **Find**
 
@@ -200,8 +214,6 @@ Please Feel free to fork and/or PR if you have any additions.
   showReport="false"
   showServerInfo="false" />
   ```
-
-````
 
 **Nmap**
 
@@ -305,4 +317,7 @@ Please Feel free to fork and/or PR if you have any additions.
 ```
 
 - Restart IIS.
-````
+
+```
+
+```

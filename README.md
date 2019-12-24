@@ -48,13 +48,29 @@ Please Feel free to fork and/or PR if you have any additions.
 
 **Docker**
 
+- Dokcer resources usage - `docker info`
+- know how much space is taken by a particular container `docker container ls -s`
+- Know how much spaces is used by Docker Root Dir `du -h --max-depth=1 /var/lib/docker`
+- Docker storage usage `docker system df`
+- Docker list volumes `docker volume ls`
+- Docker list images that are locally stored with the Docker Engine `docker image ls`
+- Docker inspect volumes `docker volume inspect VOLUME NAME`
 - Remove a group of images - `docker images | grep "<none>" | awk '{print $3}' | xargs docker rmi`
 - Remove all untagged containers - `docker rm $(docker ps -aq --filter status=exited)`
 - Remove all untagged images - `docker rmi $(docker images -q --filter dangling=true)`
+- Remove old (dangling) Docker volumes - `docker volume rm $(docker volume ls -qf dangling=true)`
+- Docker remove redundant objects at once `docker system prune`
 - Install on Ubuntu - `curl -sSL https://get.docker.com/ubuntu/ | sudo sh`
 - Get stats from all containers on a host - `docker ps -q | xargs docker stats`
 - Tail last 300 lines of logs for a container - `docker logs --tail=300 -f <container_id>`
-- Remove old (dangling) Docker volumes - `docker volume rm $(docker volume ls -qf dangling=true)`
+- Build an image from the Dockerfile in thecurrent directory and tag the image `docker build -t myimage:1.0 .`
+- Pull an image from a registry `docker pull myimage:1.0`
+- Retag a local image with a new image name and tag `docker tag myimage:1.0 myrepo/myimage:2.0`
+- Push an image to a registry `docker push myrepo/myimage:2.0`
+- Run a container from the Alpine version 3.9 image, name the running container “web” and expose port 5000 externally, mapped to port 80 inside the container `docker container run --name web -p 5000:80 alpine:3.9`
+- Stop a running container through SIGTERM `docker container stop web`
+- Stop a running container through SIGKILL `docker container kill web`
+- List the networks `docker network ls`
 
 **Find**
 
@@ -98,14 +114,14 @@ Please Feel free to fork and/or PR if you have any additions.
 
 - Hide tomcat stack traces (showReport) as well as the Server info:
   Add below lines at the HOST section
+
   ```sh
   <Valve className="org.apache.catalina.valves.ErrorReportValve"
   showReport="false"
   showServerInfo="false" />
   ```
 
-````
-**Nmap**
+  **Nmap**
 
 - Check single port on single host - `nmap -p <port> <host/IP>`
 - Intrusive port scan on a single host - `nmap -sS <host/IP>`
@@ -170,7 +186,7 @@ Please Feel free to fork and/or PR if you have any additions.
     <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
-````
+```
 
 - Save the file
 - Restart Tomcat

@@ -74,42 +74,82 @@ Please Feel free to fork and/or PR if you have any additions.
 - Shell Script to Install Docker on Ubuntu
 
 ```sh
-#!/bin/bash
-set -e
-#Uninstall old versions
-sudo apt-get remove docker docker-engine docker.io containerd runc
-#Update the apt package index:
-sudo apt-get update
+    #!/bin/bash
+    set -e
+    #Uninstall old versions
+    sudo apt-get remove docker docker-engine docker.io containerd runc
+    #Update the apt package index:
+    sudo apt-get update
+    #Install packages to allow apt to use a repository over HTTPS:
+    sudo apt-get install -y \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        gnupg-agent \
+        software-properties-common
+    # Add docker's package signing key
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    # Add repository
+    sudo add-apt-repository -y \
+      "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+      $(lsb_release -cs) \
+      stable"
+    # Install latest stable docker stable version
+    sudo apt-get update
+    sudo apt-get -y install docker-ce
+    # Enable & start docker
+    sudo systemctl enable docker
+    sudo systemctl start docker
+    # add current user to the docker group to avoid using sudo when running docker
+    sudo usermod -a -G docker $USER
+     # Output current version
+    docker -v
+```
 
-#Install packages to allow apt to use a repository over HTTPS:
+- Shell Script to Install Docker on Centos
 
- sudo apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
+  ```sh
+  #!/bin/bash
+  #Get Docker Engine - Community for CentOS + docker compose
+  set -e
+  #Uninstall old versions
+  sudo yum remove docker docker-common docker-selinux docker-engine-selinux docker-engine docker-ce
+  #Update the packages:
+  sudo yum update -y
+  #Install needed packages
+  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+  # Configure the docker-ce repo:
+  sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  # Install the latest docker-ce
+  sudo yum install docker-ce
+  # Enable & start docker
+  sudo systemctl enable docker.service
+  sudo systemctl start docker.service
+  # add current user to the docker group to avoid using sudo when running docker
+  sudo usermod -a -G docker $(whoami)
+   # Output current version
+  docker -v
+  ```
 
-# Add docker's package signing key
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- Shell Script to Install Docker on AWS linux
 
-# Add repository
-sudo add-apt-repository -y \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-
-# Install latest stable docker stable version
-sudo apt-get update
-sudo apt-get -y install docker-ce
-
-# Enable & start docker
-sudo systemctl enable docker
-sudo systemctl start docker
-
-# add current user to the docker group to avoid using sudo when running docker
-sudo usermod -a -G docker $USER
-
+```sh
+   #!/bin/bash
+   #Get Docker Engine - Community for CentOS + docker compose
+   set -e
+ #Uninstall old versions
+ sudo yum remove docker docker-common docker-selinux docker-engine-selinux docker-engine docker-ce
+ #Update the packages:
+ sudo yum update -y
+ #Install the most recent Docker Community Edition package.
+ sudo amazon-linux-extras install docker -y
+ # Enable & start docker
+ sudo service docker start
+ # add current user to the docker group to avoid using sudo when running docker
+ #sudo usermod -a -G docker ec2-user
+ sudo usermod -a -G docker $(whoami)
+ # Output current version
+  docker -v
 ```
 
 **Find**
@@ -161,7 +201,9 @@ sudo usermod -a -G docker $USER
   showServerInfo="false" />
   ```
 
-  **Nmap**
+````
+
+**Nmap**
 
 - Check single port on single host - `nmap -p <port> <host/IP>`
 - Intrusive port scan on a single host - `nmap -sS <host/IP>`
@@ -263,3 +305,4 @@ sudo usermod -a -G docker $USER
 ```
 
 - Restart IIS.
+````

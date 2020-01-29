@@ -261,8 +261,8 @@ Please Feel free to fork and/or PR if you have any additions.
 - Enable HTTP Strict Transport Security protocol in Tomcat
   To enable HSTS in Tomcat, follow these steps:
 
-* Open the <Tomcat>/conf/web.xml file in a text editor.
-* Uncomment the httpHeaderSecurity filter definition and the <filter-mapping> section, and then add the hstsMaxAgeSeconds parameter, as shown below.
+ - Open the <Tomcat>/conf/web.xml file in a text editor.
+ - Uncomment the httpHeaderSecurity filter definition and the <filter-mapping> section, and then add the hstsMaxAgeSeconds parameter, as shown below.
 
 ```sh
 
@@ -283,17 +283,17 @@ Please Feel free to fork and/or PR if you have any additions.
 
 ```
 
-- Save the file
-- Restart Tomcat
+ -  Save the file
+ -  Restart Tomcat
 
 * Enable HTTP Strict Transport Security protocol in Apache
   To enable HSTS in Tomcat, follow these steps:
 
   - Open the <Apache>/conf/httpd.conf file in a text editor.
 
-- Uncomment the header module:
+  -  Uncomment the header module:
   LoadModule headers_module modules/mod_headers.so
-- Add a header setting in the VirtualHost section:
+  - Add a header setting in the VirtualHost section:
 
 ```sh
     <VirtualHost www.example.com:80>
@@ -317,4 +317,31 @@ Please Feel free to fork and/or PR if you have any additions.
         </system.webServer>
 ```
 
-- Restart IIS.
+  - Restart IIS.
+
+* Injecting HTTP Response with the secure header in Tomcat
+
+```sh
+
+<filter>
+        <filter-name>httpHeaderSecurity</filter-name>
+        <filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
+        <async-supported>true</async-supported>
+        <init-param>
+          <param-name>antiClickJackingEnabled</param-name>
+          <param-value>true</param-value>
+        </init-param>
+        <init-param>
+          <param-name>antiClickJackingOption</param-name>
+          <param-value>DENY</param-value>
+        </init-param>
+    </filter>
+  <filter-mapping> 
+    <filter-name>httpHeaderSecurity</filter-name> 
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+  <welcome-file-list>
+      <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+
+```

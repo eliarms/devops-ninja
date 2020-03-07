@@ -73,51 +73,51 @@ Please Feel free to fork and/or PR if you have any additions.
 - List the networks `docker network ls`
 - Shell Script to Install Docker on Ubuntu
 
-```sh
-    #!/bin/bash
-    set -e
-    #Uninstall old versions
-    sudo apt-get remove docker docker-engine docker.io containerd runc
-    #Update the apt package index:
-    sudo apt-get update
-    #Install packages to allow apt to use a repository over HTTPS:
-    sudo apt-get install -y \
-        apt-transport-https \
-        ca-certificates \
-        curl \
-        gnupg-agent \
-        software-properties-common
-    # Add docker's package signing key
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    # Add repository
-    sudo add-apt-repository -y \
-      "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-      $(lsb_release -cs) \
-      stable"
-    # Install latest stable docker stable version
-    sudo apt-get update
-    sudo apt-get -y install docker-ce
-    # Enable & start docker
-    sudo systemctl enable docker
-    sudo systemctl start docker
-    # add current user to the docker group to avoid using sudo when running docker
-    sudo usermod -a -G docker $USER
-     # Output current version
-    docker -v
-```
+  ```sh
+  #!/bin/bash
+  set -e
+  #Uninstall old versions
+  sudo apt-get remove docker docker-engine docker.io containerd runc
+  #Update the apt package index:
+  sudo apt-get update
+  #Install packages to allow apt to use a repository over HTTPS:
+  sudo apt-get install -y \
+      apt-transport-https \
+      ca-certificates \
+      curl \
+      gnupg-agent \
+      software-properties-common
+  # Add docker's package signing key
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  # Add repository
+  sudo add-apt-repository -y \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+  # Install latest stable docker stable version
+  sudo apt-get update
+  sudo apt-get -y install docker-ce
+  # Enable & start docker
+  sudo systemctl enable docker
+  sudo systemctl start docker
+  # add current user to the docker group to avoid using sudo when running docker
+  sudo usermod -a -G docker $USER
+   # Output current version
+  docker -v
+  ```
 
 - Shell Script to Install Docker on Centos
 
   ```sh
-  #!/bin/bash
-  #Get Docker Engine - Community for CentOS + docker compose
-  set -e
-  #Uninstall old versions
-  sudo yum remove docker docker-common docker-selinux docker-engine-selinux docker-engine docker-ce
-  #Update the packages:
-  sudo yum update -y
-  #Install needed packages
-  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+     #!/bin/bash
+     #Get Docker Engine - Community for CentOS + docker compose
+     set -e
+     #Uninstall old versions
+     sudo yum remove docker docker-common docker-selinux docker-engine-selinux docker-engine docker-ce
+     #Update the packages:
+     sudo yum update -y
+      #Install needed packages
+     sudo yum install -y yum-utils device-mapper-persistent-data lvm2
   # Configure the docker-ce repo:
   sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
   # Install the latest docker-ce
@@ -127,30 +127,30 @@ Please Feel free to fork and/or PR if you have any additions.
   sudo systemctl start docker.service
   # add current user to the docker group to avoid using sudo when running docker
   sudo usermod -a -G docker $(whoami)
-   # Output current version
+  # Output current version
   docker -v
   ```
 
 - Shell Script to Install Docker on AWS linux
 
-```sh
-  #!/bin/bash
-  #Get Docker Engine - Community for CentOS + docker compose
-  set -e
- #Uninstall old versions
- sudo yum remove docker docker-common docker-selinux docker-engine-selinux docker-engine docker-ce
- #Update the packages:
- sudo yum update -y
- #Install the most recent Docker Community Edition package.
- sudo amazon-linux-extras install docker -y
- # Enable & start docker
- sudo service docker start
- # add current user to the docker group to avoid using sudo when running docker
- #sudo usermod -a -G docker ec2-user
- sudo usermod -a -G docker $(whoami)
- # Output current version
-  docker -v
-```
+  ```sh
+      #!/bin/bash
+      #Get Docker Engine - Community for CentOS + docker compose
+      set -e
+      #Uninstall old versions
+      sudo yum remove docker docker-common docker-selinux docker-engine-selinux docker-engine docker-ce
+      #Update the packages:
+      sudo yum update -y
+      #Install the most recent Docker Community Edition package.
+      sudo amazon-linux-extras install docker -y
+      # Enable & start docker
+      sudo service docker start
+      # add current user to the docker group to avoid using sudo when running docker
+      #sudo usermod -a -G docker ec2-user
+      sudo usermod -a -G docker $(whoami)
+      # Output current version
+       docker -v
+  ```
 
 **Docker Compose**
 
@@ -216,6 +216,32 @@ Please Feel free to fork and/or PR if you have any additions.
   showServerInfo="false" />
   ```
 
+* Injecting HTTP Response with the secure header in Tomcat
+
+  ```sh
+
+  <filter>
+      <filter-name>httpHeaderSecurity</filter-name>
+      <filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
+      <async-supported>true</async-supported>
+      <init-param>
+        <param-name>antiClickJackingEnabled</param-name>
+        <param-value>true</param-value>
+      </init-param>
+      <init-param>
+        <param-name>antiClickJackingOption</param-name>
+        <param-value>DENY</param-value>
+      </init-param>
+      </filter>
+      <filter-mapping>
+      <filter-name>httpHeaderSecurity</filter-name>
+      <url-pattern>/*</url-pattern>
+      </filter-mapping>
+      <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+      </welcome-file-list>
+  ```
+
 **Nmap**
 
 - Check single port on single host - `nmap -p <port> <host/IP>`
@@ -261,53 +287,50 @@ Please Feel free to fork and/or PR if you have any additions.
 - Enable HTTP Strict Transport Security protocol in Tomcat
   To enable HSTS in Tomcat, follow these steps:
 
- - Open the <Tomcat>/conf/web.xml file in a text editor.
- - Uncomment the httpHeaderSecurity filter definition and the <filter-mapping> section, and then add the hstsMaxAgeSeconds parameter, as shown below.
+  - Open the <Tomcat>/conf/web.xml file in a text editor.
+  - Uncomment the httpHeaderSecurity filter definition and the <filter-mapping> section, and then add the hstsMaxAgeSeconds parameter, as shown below.
 
-```sh
-
-  <filter>
-    <filter-name>httpHeaderSecurity</filter-name>
-   <filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
+    ```sh
+    <filter>
+        <filter-name>httpHeaderSecurity</filter-name>
+    <filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
     <init-param>
       <param-name>hstsMaxAgeSeconds</param-name>
       <param-value>31536000</param-value>
-    </init-param>
-    <async-supported>true</async-supported>
-    </filter>
-    <filter-mapping>
-    <filter-name>httpHeaderSecurity</filter-name>
-    <url-pattern>/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
+        </init-param>
+        <async-supported>true</async-supported>
+        </filter>
+        <filter-mapping>
+        <filter-name>httpHeaderSecurity</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        </filter-mapping>
+    ```
 
-```
-
- -  Save the file
- -  Restart Tomcat
+  - Save the file
+  - Restart Tomcat
 
 * Enable HTTP Strict Transport Security protocol in Apache
   To enable HSTS in Tomcat, follow these steps:
 
   - Open the <Apache>/conf/httpd.conf file in a text editor.
 
-  -  Uncomment the header module:
-  LoadModule headers_module modules/mod_headers.so
+  - Uncomment the header module:
+    LoadModule headers_module modules/mod_headers.so
   - Add a header setting in the VirtualHost section:
 
-```sh
+    ```sh
     <VirtualHost www.example.com:80>
     Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains; preload"
-</VirtualHost>
-
-```
+    </VirtualHost>
+    ```
 
 - Enable HTTP Strict Transport Security protocol in IIS
   To enable HSTS in IIS, do the following:
 
   - Add a Strict-Transport-Security header to the web.config file under the IIS installation root directory:
 
-```sh
+    ```sh
         <system.webServer>
         <httpProtocol>
         <customHeaders>
@@ -315,33 +338,12 @@ Please Feel free to fork and/or PR if you have any additions.
          </customHeaders>
         </httpProtocol>
         </system.webServer>
-```
+    ```
 
-  - Restart IIS.
+  - Restart IIS
 
-* Injecting HTTP Response with the secure header in Tomcat
-
-```sh
-
-<filter>
-        <filter-name>httpHeaderSecurity</filter-name>
-        <filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
-        <async-supported>true</async-supported>
-        <init-param>
-          <param-name>antiClickJackingEnabled</param-name>
-          <param-value>true</param-value>
-        </init-param>
-        <init-param>
-          <param-name>antiClickJackingOption</param-name>
-          <param-value>DENY</param-value>
-        </init-param>
-    </filter>
-  <filter-mapping> 
-    <filter-name>httpHeaderSecurity</filter-name> 
-    <url-pattern>/*</url-pattern>
-</filter-mapping>
-  <welcome-file-list>
-      <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
-
-```
+- Permissions
+  - Set permissions recursively on a dir (with ACL enabled)
+    ```sh
+    setfacl -R -m u:eliarmsfolder:rwX
+    ```

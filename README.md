@@ -345,5 +345,10 @@ Please Feel free to fork and/or PR if you have any additions.
 - Permissions
   - Set permissions recursively on a dir (with ACL enabled)
     ```sh
-    setfacl -R -m u:eliarmsfolder:rwX
+    setfacl -R -m u:userid:rwx foldername
+    ```
+- JAVA
+  - Completly remove Openjdk from redhat
+    ```sh
+     rpm -qa | grep openjdk | xargs  yum -y remove
     ```

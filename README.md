@@ -195,6 +195,35 @@ Please Feel free to fork and/or PR if you have any additions.
 
 - Check nat rules for ip redirection - `iptables -nvL -t nat`
 
+**Apache**
+
+- Turn off “ServerSignature” and “ServerToken” on Apache
+
+  - Edit httpd.conf or apache2.conf
+
+  ```sh
+  // Kali, Debian, Ubuntu  Linux Mint
+    sudo vi /etc/apache2/apache2.conf
+  // CentOS, Fedora, RHEL , Arch Linux
+   sudo vi /etc/httpd/conf/httpd.conf
+  ```
+
+  - Add below settings to the file
+
+  ```sh
+     ServerSignature Off
+     ServerTokens Prod
+  ```
+
+  - Restart Apache
+
+  ```sh
+  // Kali, Debian, Ubuntu Linux Mint
+     sudo service apache2 restart
+  //Fedora, CentOS/RHEL 7,Arch Linux
+   systemctl restart httpd.service
+  ```
+
 **Nginx**
 
 - Check installed modules - `nginx -V`

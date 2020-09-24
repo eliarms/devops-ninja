@@ -167,6 +167,19 @@ Please Feel free to fork and/or PR if you have any additions.
   docker-compose -v
   ```
 
+  **Dockerfile**
+
+- Dockerizing a simple nodeJs app
+
+```sh
+FROM node:4.6
+WORKDIR /app
+ADD ./app
+RUN npm install
+EXPOSE 3000
+CMD npm start
+```
+
 **Find**
 
 - Exlcude directories in find - `find /tmp -not \( -path /tmp/dir -prune \) -type p -o -type b`

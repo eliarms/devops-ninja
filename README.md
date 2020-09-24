@@ -291,7 +291,7 @@ Please Feel free to fork and/or PR if you have any additions.
 **SSH**
 
 - Generate generic ssh key pair - `ssh-keygen -q -t rsa -f ~/.ssh/<name> -N '' -C <name>`
-- AWS PEM key to ssh PUB key : ` ssh-keygen -y -f eliarms.pem > eliarms.pub
+- AWS PEM key to ssh PUB key : `ssh-keygen -y -f eliarms.pem > eliarms.pub`
 
 **Tail log with colored output**
 

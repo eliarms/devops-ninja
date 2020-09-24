@@ -167,7 +167,7 @@ Please Feel free to fork and/or PR if you have any additions.
   docker-compose -v
   ```
 
-  **Dockerfile**
+**Dockerfile**
 
 - Dockerizing a simple nodeJs app
 

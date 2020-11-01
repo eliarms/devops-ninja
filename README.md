@@ -198,6 +198,24 @@ CMD npm start
 - Pull latest changes stashing changes first - `git pull --autostash`
 - Make an empty commit (good for CI) - `git commit --allow-empty -m "Trigger notification"`
 
+**Jenkins**
+
+- Setup Jenkins on EC2
+
+```sh
+#!/bin/bash
+sudo yum update -y
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+sudo yum install java-1.8.0 -y
+sudo yum install jenkins -y
+sudo service jenkins start
+
+sudo cat
+/var/lib/jenkins/secrets/initialAdminPassword
+
+```
+
 **Grep**
 
 - Look through all files in current dir for word “foo” - `grep -R "foo” .`

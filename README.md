@@ -12,6 +12,10 @@ Please Feel free to fork and/or PR if you have any additions.
 - Show all established connections `lsof -i`
 - Show listening connections - `lsof -ni | grep LISTEN`
 
+**Openssl**
+
+- verify if TLS 1.2 is supported `openssl s_client -connect google.com:443 -tls1_2`
+
 **Listing Running Services Under SystemD in Linux**
 
 - systemctl list-units --type=service

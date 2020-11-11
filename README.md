@@ -12,6 +12,10 @@ Please Feel free to fork and/or PR if you have any additions.
 - Show all established connections `lsof -i`
 - Show listening connections - `lsof -ni | grep LISTEN`
 
+**Listing Running Services Under SystemD in Linux**
+
+- systemctl list-units --type=service
+
 **Check a public IP**
 
 - `curl http://whatismyip.org/`

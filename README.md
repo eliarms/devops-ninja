@@ -12,6 +12,12 @@ Please Feel free to fork and/or PR if you have any additions.
 - Show all established connections `lsof -i`
 - Show listening connections - `lsof -ni | grep LISTEN`
 
+**Linux Commands**
+
+- Copy the content of a folder to an existing folder - `cp -a /source/. /dest/`
+- Delete everything in a directory - `rm /path/to/dir/*`
+- Remove all sub-directories and files - `rm -r /path/to/dir/*`
+
 **Openssl**
 
 - verify if TLS 1.2 is supported `openssl s_client -connect google.com:443 -tls1_2`

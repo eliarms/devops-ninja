@@ -17,6 +17,7 @@ Please Feel free to fork and/or PR if you have any additions.
 - Copy the content of a folder to an existing folder - `cp -a /source/. /dest/`
 - Delete everything in a directory - `rm /path/to/dir/*`
 - Remove all sub-directories and files - `rm -r /path/to/dir/*`
+- Find and replace whole words in vim - `:%s/\<word\>\C/newword/g`
 
 **Openssl**
 

@@ -35,6 +35,7 @@ Please Feel free to fork and/or PR if you have any additions.
 - Convert a PEM file to DER - `openssl x509 -outform der -in certificate.pem -out certificate.der`
 - Convert a PKCS#12 file (.pfx .p12) containing a private key and certificates to PEM - `openssl pkcs12 -in keyStore.pfx -out keyStore.pem -nodes`
 - Convert a PEM certificate file and a private key to PKCS#12 (.pfx .p12) - `openssl pkcs12 -export -out certificate.pfx -inkey privateKey.key -in certificate.crt -certfile CACert.crt`
+- Convert a .PEM file to a value that can be passed in a JSON string - `awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' your_private_key.pem > output.txt`
 
 **Listing Running Services Under SystemD in Linux**
 

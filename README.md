@@ -442,3 +442,6 @@ sudo cat
     ```sh
      rpm -qa | grep openjdk | xargs  yum -y remove
     ```
+**GCP**
+
+- View Compute Engine startup scripts logs - `sudo journalctl -u google-startup-scripts service`

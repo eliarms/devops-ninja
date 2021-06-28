@@ -226,6 +226,7 @@ CMD npm start
 - View files changed in a commit - `git log --stat`
 - Pull latest changes stashing changes first - `git pull --autostash`
 - Make an empty commit (good for CI) - `git commit --allow-empty -m "Trigger notification"`
+- Change remote repository URL - `git remote set-url origin git://new.location"`
 
 **Jenkins**
 

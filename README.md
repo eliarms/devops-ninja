@@ -100,6 +100,21 @@ Please Feel free to fork and/or PR if you have any additions.
 - Stop a running container through SIGTERM `docker container stop web`
 - Stop a running container through SIGKILL `docker container kill web`
 - List the networks `docker network ls`
+- Copy Docker images from one host to another without using a repository
+
+```sh
+ #Step1 - Save the Docker image as a tar file
+ docker save -o <path for generated tar file> <image name> 
+ 
+ #Example
+ docker save -o c:/myfile.tar centos:16
+ 
+ #Step2 - copy your image to a new system with regular file transfer tools such as cp, scp or rsync(preferred for big files)
+ 
+ #Step3 - load the image into Docker
+ docker load -i <path to image tar file>
+ 
+  ```
 - Shell Script to Install Docker on Ubuntu
 
   ```sh

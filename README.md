@@ -242,7 +242,32 @@ CMD npm start
 - Pull latest changes stashing changes first - `git pull --autostash`
 - Make an empty commit (good for CI) - `git commit --allow-empty -m "Trigger notification"`
 - Change remote repository URL - `git remote set-url origin git://new.location"`
+- fix ".gitignore not working" issue
+```sh
+Update .gitignore with the folder/file name you want to ignore. You can use anyone of the formats mentioned below (prefer format1)
+### Format1  ###
+node_modules/
+node/
 
+### Format2  ###
+**/frontend/node_modules/**
+**/frontend/node/**
+
+Commit all the changes to git. Exclude the folder/files you dont want commit, in my case node_modules
+Execute the following command to clear the cache
+
+git rm -r --cached .
+
+Execute git status command and it should output node_modules and sub directories marked for deletion
+Now execute
+
+git add .
+
+git commit -m "fixed untracked files" 
+
+git push 
+
+```
 **Jenkins**
 
 - Setup Jenkins on EC2

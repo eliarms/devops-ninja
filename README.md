@@ -535,3 +535,44 @@ mysql -u root -p
 #You will need to type the root user password after you run this command
 
   ```
+
+**Kubernetes**
+
+- List of Resources in Kubernetes Namespace
+
+ ```sh
+ 
+ 1. Using kubectl get all
+# Using the kubectl get all command we can list down all the pods, services, statefulsets, etc. in a namespace but not all the resources are listed using this command. Hence, if you want to see the pods, services, and statefulsets in a particular namespace then you can use this command.
+kubectl get all -n namespace
+
+2. Using kubectl api-resources
+# The kubectl api-resources enumerates the resource types available in your cluster. So we can use it by combining it with kubectl get to list every instance of every resource type in a Kubernetes namespace.
+
+kubectl api-resources --verbs=list --namespaced -o name \
+  | xargs -n 1 kubectl get --show-kind --ignore-not-found -n <namespace>
+  
+# In the code above, provide your namespace in place of <namespace> and can run the above command. For too many resources present in a namespace, this command can take some time.We can use the above command, but a better variant of that would be something I found on Stackoverflow, where the above code has been converted into a function, which makes it more intuitive to use.
+ 
+function kubectlgetall {
+  for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
+    echo "Resource:" $i
+    kubectl -n ${1} get --ignore-not-found ${i}
+  done
+} 
+
+# All we have to do is provide the namespace while calling the above function. To use the above function, copy the complete code and paste it into the Linux terminal, and hit Enter. 
+# Then you can call the function: 
+kubectlgetall singlenode
+# To list down all the resources in the singlenode namespace. This function will be available for use in the current session only, once you logout of the machine, this change will be lost and you will have to again define the function first and then use it in the next session.
+
+3. Using kubectl get
+# We can also use the simple kubectl get command to list down the resources we want to see in a namespace. Rather than running kubectl get command for each resource kind, we can run it for multiple resources in one go.
+# For example, if you want to get pods, services, and deployments for a namespace, then you would run the following three commands:
+
+kubectl get service -n singlenode
+kubectl get pod -n singlenode
+kubectl get deployment -n singlenode
+#Well you can combine these three commands into a single command too,
+kubectl get service, pod, deployment -n singlenode
+ ```
